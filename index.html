@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Binario</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="app-shell">
+        <header class="app-header">
+            <h1>Bingo Binario</h1>
+            <p class="tagline">Convierte y busca del 0 al 255 en formato binario o decimal.</p>
+        </header>
+
+        <section class="controls">
+            <div class="control-block">
+                <label for="mode-select">Modo de juego</label>
+                <select id="mode-select">
+                    <option value="bin2dec">Binario -> Decimal</option>
+                    <option value="dec2bin">Decimal -> Binario</option>
+                </select>
+            </div>
+
+            <div class="control-block time-control">
+                <label for="interval-slider">Tiempo entre numeros (segundos)</label>
+                <div class="time-inputs">
+                    <input id="interval-slider" type="range" min="3" max="120" step="1" value="15">
+                    <input id="interval-input" type="number" min="3" max="300" step="1" value="15">
+                </div>
+            </div>
+
+            <div class="control-block toggle-block">
+                <label class="toggle" for="toggle-solution">
+                    <input id="toggle-solution" type="checkbox">
+                    <span class="toggle-switch" aria-hidden="true">
+                        <span class="toggle-thumb"></span>
+                    </span>
+                    <span class="toggle-label">Mostrar conversion opuesta</span>
+                </label>
+            </div>
+
+            <div class="button-group">
+                <button id="start-btn" class="primary">Iniciar</button>
+                <button id="pause-btn" disabled>Pausar</button>
+                <button id="next-btn" disabled>Siguiente</button>
+                <button id="reset-btn">Reiniciar</button>
+            </div>
+        </section>
+
+        <section class="display">
+            <div class="countdown">
+                <span class="countdown-label">Proximo numero en</span>
+                <span id="countdown-timer">--</span>
+                <span class="countdown-unit">s</span>
+            </div>
+            <div class="number-card">
+                <span class="mode-hint" id="mode-hint">Busca el numero decimal correspondiente.</span>
+                <span id="current-number" class="main-number">Listo para jugar</span>
+                <span id="current-translation" class="translation hidden"></span>
+            </div>
+            <div class="progress">
+                <span>Numeros cantados: <strong id="drawn-count">0</strong> / 256</span>
+                <span id="remaining-count">Restan 256 numeros</span>
+            </div>
+        </section>
+
+        <section class="history">
+            <h2>Historial de numeros</h2>
+            <p id="history-empty">Aun no se han cantado numeros.</p>
+            <ul id="history-list"></ul>
+        </section>
+
+        <section class="instructions">
+            <h2>Como jugar</h2>
+            <p>Configura el modo y el intervalo deseado, presiona <strong>Iniciar</strong> y proyecta la pantalla. Cada intervalo el sistema cantara un numero entre 0 y 255, evitando repeticiones.</p>
+            <p>En modo <strong>Binario -> Decimal</strong> se muestran codigos binarios de 8 bits y el alumnado debe buscarlos en cartones con numeros decimales. En modo <strong>Decimal -> Binario</strong>, ocurre lo inverso.</p>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
