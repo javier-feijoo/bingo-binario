@@ -16,7 +16,8 @@ const elements = {
     drawnCount: document.getElementById("drawn-count"),
     remainingCount: document.getElementById("remaining-count"),
     historyList: document.getElementById("history-list"),
-    historyEmpty: document.getElementById("history-empty")
+    historyEmpty: document.getElementById("history-empty"),
+    historyToggle: document.getElementById("history-show-conversion")
 };
 
 const state = {
@@ -60,6 +61,12 @@ function attachListeners() {
     elements.toggleSolution.addEventListener("change", () => {
         updateTranslationVisibility();
     });
+
+    if (elements.historyToggle) {
+        elements.historyToggle.addEventListener("change", () => {
+            renderHistory();
+        });
+    }
 
     elements.startButton.addEventListener("click", handleStart);
     elements.pauseButton.addEventListener("click", handlePause);
@@ -199,25 +206,36 @@ function renderHistory() {
     }
     elements.historyEmpty.classList.add("hidden");
 
+    const showConversion =
+        !elements.historyToggle || elements.historyToggle.checked;
+
     state.history.forEach((value) => {
         const item = document.createElement("li");
         const binary = toBinary(value);
         const decimal = value.toString(10);
+        const baseText =
+            state.mode === "bin2dec"
+                ? `BIN ${binary}`
+                : `DEC ${decimal.padStart(3, " ")}`;
+        const conversionText =
+            state.mode === "bin2dec"
+                ? `DEC ${decimal.padStart(3, " ")}`
+                : `BIN ${binary}`;
 
-        const primary = document.createElement("span");
-        primary.className = "history-label";
-        const secondary = document.createElement("span");
-        secondary.className = "history-value";
+        const baseSpan = document.createElement("span");
+        baseSpan.className = "history-label";
+        baseSpan.textContent = baseText;
+        item.append(baseSpan);
 
-        if (state.mode === "bin2dec") {
-            primary.textContent = `BIN ${binary}`;
-            secondary.textContent = `DEC ${decimal.padStart(3, " ")}`;
+        if (showConversion) {
+            const conversionSpan = document.createElement("span");
+            conversionSpan.className = "history-value";
+            conversionSpan.textContent = conversionText;
+            item.append(conversionSpan);
         } else {
-            primary.textContent = `DEC ${decimal.padStart(3, " ")}`;
-            secondary.textContent = `BIN ${binary}`;
+            item.classList.add("single-value");
         }
 
-        item.append(primary, secondary);
         elements.historyList.appendChild(item);
     });
 }

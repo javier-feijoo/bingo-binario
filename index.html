@@ -14,33 +14,35 @@
         </header>
 
         <section class="controls">
-            <div class="control-block">
-                <label for="mode-select">Modo de juego</label>
-                <select id="mode-select">
-                    <option value="bin2dec">Binario -> Decimal</option>
-                    <option value="dec2bin">Decimal -> Binario</option>
-                </select>
-            </div>
+            <div class="control-grid">
+                <div class="control-block">
+                    <label for="mode-select">Modo de juego</label>
+                    <select id="mode-select">
+                        <option value="bin2dec">Binario -> Decimal</option>
+                        <option value="dec2bin">Decimal -> Binario</option>
+                    </select>
+                </div>
 
-            <div class="control-block time-control">
-                <label for="interval-slider">Tiempo entre numeros (segundos)</label>
-                <div class="time-inputs">
-                    <input id="interval-slider" type="range" min="3" max="120" step="1" value="15">
-                    <input id="interval-input" type="number" min="3" max="300" step="1" value="15">
+                <div class="control-block time-control">
+                    <label for="interval-slider">Tiempo entre numeros (segundos)</label>
+                    <div class="time-inputs">
+                        <input id="interval-slider" type="range" min="3" max="120" step="1" value="15">
+                        <input id="interval-input" type="number" min="3" max="300" step="1" value="15">
+                    </div>
+                </div>
+
+                <div class="control-block toggle-block">
+                    <label class="toggle" for="toggle-solution">
+                        <input id="toggle-solution" type="checkbox">
+                        <span class="toggle-switch" aria-hidden="true">
+                            <span class="toggle-thumb"></span>
+                        </span>
+                        <span class="toggle-label">Mostrar conversion opuesta</span>
+                    </label>
                 </div>
             </div>
 
-            <div class="control-block toggle-block">
-                <label class="toggle" for="toggle-solution">
-                    <input id="toggle-solution" type="checkbox">
-                    <span class="toggle-switch" aria-hidden="true">
-                        <span class="toggle-thumb"></span>
-                    </span>
-                    <span class="toggle-label">Mostrar conversion opuesta</span>
-                </label>
-            </div>
-
-            <div class="button-group">
+            <div class="button-row">
                 <button id="start-btn" class="primary">Iniciar</button>
                 <button id="pause-btn" disabled>Pausar</button>
                 <button id="next-btn" disabled>Siguiente</button>
@@ -66,7 +68,16 @@
         </section>
 
         <section class="history">
-            <h2>Historial de numeros</h2>
+            <div class="history-header">
+                <h2>Historial de numeros</h2>
+                <label class="toggle history-toggle" for="history-show-conversion">
+                    <input id="history-show-conversion" type="checkbox">
+                    <span class="toggle-switch" aria-hidden="true">
+                        <span class="toggle-thumb"></span>
+                    </span>
+                    <span class="toggle-label">Ver conversion</span>
+                </label>
+            </div>
             <p id="history-empty">Aun no se han cantado numeros.</p>
             <ul id="history-list"></ul>
         </section>
