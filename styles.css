@@ -31,10 +31,31 @@ body {
     gap: 1.6rem;
 }
 
-.app-header h1 {
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4rem;
+}
+
+.app-logo {
+    width: clamp(62px, 9vw, 92px);
+    height: clamp(62px, 9vw, 92px);
+    object-fit: contain;
+}
+
+.app-title h1 {
     font-size: clamp(2.5rem, 4vw, 3.5rem);
     margin: 0;
     letter-spacing: -0.02em;
+    color: #1565c0;
+}
+
+.app-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .tagline {
@@ -379,6 +400,13 @@ button:disabled {
     line-height: 1.6;
     color: var(--muted);
     font-size: 0.98rem;
+}
+
+.app-footer {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
 }
 
 .hidden {
